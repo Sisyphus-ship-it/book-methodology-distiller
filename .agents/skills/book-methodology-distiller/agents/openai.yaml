@@ -1,7 +1,7 @@
 interface:
-  display_name: "书籍方法论蒸馏器"
-  short_description: "将书籍与理论体系蒸馏为可执行的方法论 Skill"
-  default_prompt: "Use $book-methodology-distiller to turn a book list or theory system into a reusable methodology skill."
+  display_name: "多源方法论蒸馏器"
+  short_description: "将书籍、视频、帖子等资料蒸馏为方法论 Skill"
+  default_prompt: "Use $book-methodology-distiller to turn books, videos, posts, or online resources into a reusable methodology skill."
 
 policy:
   allow_implicit_invocation: true

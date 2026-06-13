@@ -1,13 +1,13 @@
 ---
 name: book-methodology-distiller
-description: Use when the user wants to distill books, theory systems, schools of thought, author ideas, or literature into a reusable Codex methodology skill; trigger on 学习这些书, 蒸馏成方法论, 创建思想体系 Skill, 把理论变成现实问题解决工具, or 建立决策框架.
+description: Use when the user wants to distill books, articles, webpages, videos, posts, social media threads, theory systems, schools of thought, author ideas, expert traces, or online resources into a reusable Codex methodology skill; trigger on 蒸馏方法论, 提炼经验, 学习这些资料, 抖音/B站/知乎经验总结, 创建思想体系 Skill, or 把内容变成现实问题解决工具.
 ---
 
-# 书籍方法论蒸馏器
+# 多源方法论蒸馏器
 
 ## Overview
 
-Transform books, theory systems, schools of thought, author ideas, or literature collections into usable Codex methodology skills. Do not summarize books; encode scattered, implicit, and verbose knowledge into structured, explicit, compact instructions that let an agent reproduce expert-like judgment in a specific scene.
+Transform books, articles, webpages, videos, posts, social media threads, theory systems, schools of thought, author ideas, expert traces, or online resource collections into usable Codex methodology skills. Do not summarize content; encode scattered, implicit, and verbose knowledge into structured, explicit, compact instructions that let an agent reproduce expert-like judgment in a specific scene.
 
 ## Core Rule
 
@@ -17,7 +17,7 @@ Always convert source material through this chain:
 source claim -> methodology principle -> diagnostic question -> operating step -> real-world use
 ```
 
-The final output must help Codex analyze, decide, act, verify, and review when the user brings a real problem. It must not become chapter notes, quote collections, background essays, or a replacement for the original books.
+The final output must help Codex analyze, decide, act, verify, and review when the user brings a real problem. It must not become chapter notes, video recaps, quote collections, background essays, or a replacement for the original sources.
 
 Keep the main `SKILL.md` compact. Move detailed atomic rules, eval plans, source maps, concept cards, and long examples into `references/` or `templates/`.
 
@@ -29,18 +29,20 @@ Classify every source before distilling:
 |---|---|---|---|
 | Full text read | PDF, EPUB, TXT, MD, notes, or pasted text has been inspected | Source-grounded cards, source map, calibrated skill | Fabricating missing pages |
 | Metadata only | User only gave title, author, list, or theme | Pre-distillation framework, extraction templates, tentative skill skeleton | Precise quotations, page claims, "I read chapter..." claims |
+| Media transcript read | Video transcript, subtitles, detailed notes, or user-provided timestamp notes were inspected | Timestamped method extraction, creator-claim mapping, tentative experience rules | Claiming to have watched scenes not provided |
+| Post/thread read | Article, post, comments, or thread text was inspected | Author-claim extraction, comment-pattern extraction, disagreement mapping | Treating comments as verified facts |
 | Public-knowledge inference | The work is known but not supplied in this session | Clearly labeled tentative framework | Treating inference as textual evidence |
 | Needs verification | Source, edition, or interpretation is uncertain | Ask for source or mark needs-calibration | Hiding uncertainty |
 
-If only titles are available, state:
+If only titles, links, or platform names are available, state:
 
 ```markdown
 当前资料状态：
 
-- 已有：书名列表
-- 缺少：原文、版本、目录、重点章节
-- 可以先做：方法论框架设计、阅读提取模板、Skill 骨架
-- 不能直接做：精确引文、逐章来源映射、严格原典校准
+- 已有：标题/链接/平台/资料名称
+- 缺少：正文、转录稿、字幕、关键片段、评论样本、版本或发布时间
+- 可以先做：预蒸馏框架、提取模板、Skill 骨架
+- 不能直接做：精确引文、逐段/逐帧来源映射、严格原典校准
 ```
 
 ## Distillability Gate
@@ -62,7 +64,7 @@ Do not distill when the task is one-off, too variable to standardize, or already
 Follow this six-step distillation loop:
 
 1. Identify the target: clarify or infer the target skill name, source list, problem domain, output language, depth, citation needs, and required artifacts.
-2. Collect raw material: create `references/source_map.md`; prefer 3-5 high-quality samples, source passages, expert traces, decision logs, or repeated user feedback over many weak examples.
+2. Collect raw material: create `references/source_map.md`; prefer 3-5 high-quality samples, source passages, transcripts, timestamp notes, post threads, expert traces, decision logs, or repeated user feedback over many weak examples.
 3. Extract source knowledge: process each source through the five layers below and write concept cards into `references/concept_cards.md`.
 4. Extract atomic rules: convert concepts, cases, feedback, and failures into behavior rules, decision rules, and thinking frameworks. Use `references/atomic_rules.md`.
 5. Package the skill: merge principles into `references/methodology_matrix.md`, record conflicts in `references/conflict_notes.md`, and generate the final `SKILL.md` as a problem-solving engine.
@@ -77,6 +79,21 @@ Choose the mode by available material:
 | Cold-start distillation | The user has a clear workflow but no skill yet | Record the complete workflow, mark decision points and judgment standards, package, test on 3-5 real tasks, revise |
 | Sample-based distillation | The user has high-quality outputs or reference passages | Compare commonalities and differences; common points become core rules, differences become conditional rules |
 | Feedback distillation | A skill already exists but needs optimization | Collect good/bad outputs, diagnose missing/murky/wrong rules, update rules, re-test |
+
+## Online Media and Post Sources
+
+For Douyin, Bilibili, Zhihu, Xiaohongshu, podcasts, newsletters, comments, or forum threads, read `references/media_extraction.md` when available. Treat these as experience sources, not automatically as verified theory.
+
+Separate:
+
+- creator claims
+- demonstrated actions
+- case details
+- audience/comment feedback
+- platform metrics such as likes, saves, shares, views
+- your own inference
+
+Do not treat popularity as proof. Convert online content into methodology only after identifying the applicable condition, transferable pattern, non-transferable context, risk, and validation signal.
 
 ## Five-Layer Extraction
 
@@ -184,11 +201,13 @@ For longer skills, keep core principles at 3-7 items, make each phase produce a 
 
 | Weak Output | Required Conversion |
 |---|---|
-| "The book emphasizes systems thinking." | When variables affect each other, map the variable relationships before assigning single-point blame. |
+| "The source emphasizes systems thinking." | When variables affect each other, map the variable relationships before assigning single-point blame. |
 | "The author values long-termism." | If short-term gains damage compounding capacity, protect the long-term system; if survival or cash flow is constrained, resolve the short-term bottleneck first. |
 | "Theory should connect with practice." | List facts, map theory explanations, identify unexplained parts, run a small test, revise the theory with feedback. |
 | "People matter." | In organizational issues, first distinguish ability gaps, incentive misalignment, information asymmetry, and goal conflict; choose actions by cause. |
 | Case retelling | Extract background, key variables, decision nodes, success conditions, failure risks, transferable scenes, and non-transferable boundaries. |
+| Video tip recap | Extract demonstrated action, condition of use, expected result, hidden prerequisite, risk, and verification signal. |
+| Comment consensus | Treat as crowd feedback or hypothesis; separate repeated experience from verified fact. |
 
 ## Multi-Source Fusion
 
@@ -214,7 +233,7 @@ Do not mix them because ...
 
 ## Source Types and Safety Boundaries
 
-For medicine or health books, add boundaries: do not replace clinicians, diagnose, prescribe, or suggest self-medication; help organize symptoms, understand concepts, prepare questions, interpret reports cautiously, and identify urgent care signals.
+For medicine or health books, videos, posts, or comments, add boundaries: do not replace clinicians, diagnose, prescribe, or suggest self-medication; help organize symptoms, understand concepts, prepare questions, interpret reports cautiously, and identify urgent care signals.
 
 For astrology, divination, feng shui, fate analysis, or other metaphysical systems, present them as culture, symbolic systems, or decision aids; do not claim certain prediction, replace medical/legal/financial decisions, or encourage dependency.
 
@@ -225,9 +244,12 @@ For philosophy, political theory, ideology, or major thinker systems, avoid extr
 Do not:
 
 - write chapter-by-chapter summaries as the final skill
+- write video-by-video or post-by-post recaps as the final skill
 - copy long copyrighted passages
 - fabricate citations, page numbers, editions, or source access
-- confuse user-provided titles with texts actually read
+- confuse user-provided titles/links with texts or media actually inspected
+- claim to have watched a video when only a title, link, summary, or transcript was available
+- treat likes, views, saves, or comments as proof without validation
 - treat books as absolute truth
 - force incompatible theories into one framework
 - produce empty slogans without action steps

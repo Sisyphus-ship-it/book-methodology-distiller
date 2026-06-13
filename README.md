@@ -1,6 +1,6 @@
-# 书籍方法论蒸馏器 Skill
+# 多源方法论蒸馏器 Skill
 
-这个仓库维护一个 Codex Skill：`book-methodology-distiller`。它的目标不是把书做成读书笔记，而是把一本书、一组书、一个理论体系、一个学派或一批文献，蒸馏成 Codex 可以长期调用的方法论 Skill。
+这个仓库维护一个 Codex Skill：`book-methodology-distiller`。它的目标不是把资料做成内容摘要，而是把书籍、文章、网页、抖音/Bilibili/知乎等视频或帖子、评论区经验、理论体系、专家经验和个人流程，蒸馏成 Codex 可以长期调用的方法论 Skill。
 
 核心原则：
 
@@ -8,7 +8,7 @@
 source claim -> methodology principle -> diagnostic question -> operating step -> real-world use
 ```
 
-最终产物应该让 Codex 在面对现实问题时，能够分析、判断、行动、验证和复盘，而不是机械复述书本内容。
+最终产物应该让 Codex 在面对现实问题时，能够分析、判断、行动、验证和复盘，而不是机械复述书本、视频或帖子内容。
 
 ## 目录结构
 
@@ -25,22 +25,26 @@ source claim -> methodology principle -> diagnostic question -> operating step -
 │           │   ├── concept_cards.md
 │           │   ├── conflict_notes.md
 │           │   ├── evaluation.md
+│           │   ├── media_extraction.md
 │           │   ├── methodology_matrix.md
 │           │   └── source_map.md
 │           └── templates/
 │               └── answer_template.md
-└── distilled-books/
+├── distilled-books/
+│   ├── INDEX.md
+│   └── _book-template.md
+└── distilled-sources/
     ├── INDEX.md
-    └── _book-template.md
+    └── _source-template.md
 ```
 
 ## Skill 能做什么
 
-- 判断一个书籍、理论或工作流是否值得蒸馏成 Skill。
-- 区分已读取原文、仅有书名、公共知识推断和待校准内容。
-- 从书籍中提取核心问题、概念卡、判断原则、分析模型和行动方案。
+- 判断一个书籍、视频、帖子、理论、案例或工作流是否值得蒸馏成 Skill。
+- 区分已读取原文、转录稿、帖子正文、评论样本、仅有标题/链接、公共知识推断和待校准内容。
+- 从书籍、文章、视频、帖子和评论中提取核心问题、概念卡、经验卡、判断原则、分析模型和行动方案。
 - 把概念转成可执行的原子规则，包括行为规则、决策规则和思维框架。
-- 融合多本书的方法论，并记录冲突观点和适用边界。
+- 融合多源资料的方法论，并记录冲突观点、适用边界和不可迁移条件。
 - 生成可调用的 Codex Skill 文件结构。
 - 用 baseline、Skill 激活测试和 delta 检验持续迭代。
 
@@ -49,7 +53,7 @@ source claim -> methodology principle -> diagnostic question -> operating step -
 在支持 skill 调用的 Codex 环境中使用：
 
 ```text
-$book-methodology-distiller 我想把《书名1》《书名2》《书名3》蒸馏成一个用于解决【具体问题领域】的方法论 Skill。
+$book-methodology-distiller 我想把这些书籍、视频、帖子或网络资源蒸馏成一个用于解决【具体问题领域】的方法论 Skill。
 ```
 
 完整输入示例：
@@ -59,10 +63,11 @@ $book-methodology-distiller
 
 目标：建立一套项目推进方法论 Skill
 
-书籍列表：
+资料列表：
 1. 《书名1》
-2. 《书名2》
-3. 《书名3》
+2. Bilibili 视频链接/转录稿
+3. 知乎文章或回答链接
+4. 抖音视频笔记或评论样本
 
 使用场景：
 - 我遇到项目卡住时，用这套方法诊断瓶颈
@@ -74,6 +79,7 @@ $book-methodology-distiller
 - 包含 SKILL.md
 - 包含 source_map.md
 - 包含 concept_cards.md
+- 包含 media_extraction.md
 - 包含 atomic_rules.md
 - 包含 methodology_matrix.md
 - 包含 evaluation.md
@@ -83,7 +89,7 @@ $book-methodology-distiller
 
 1. 判断是否值得蒸馏。
 2. 建立资料索引。
-3. 收集 3-5 个高质量样本或关键文本。
+3. 收集 3-5 个高质量样本、关键文本、转录稿、帖子正文、评论样本或案例。
 4. 提取结构层、概念层、原则层、模型层和行动层。
 5. 生成原子规则。
 6. 建立方法论矩阵。
@@ -107,6 +113,24 @@ distilled-books/
 
 `distilled-books/INDEX.md` 用来维护总索引，`_book-template.md` 用作单书蒸馏记录模板。
 
+## 网络资源收录
+
+`distilled-sources/` 用来收录非书籍资料，例如视频、帖子、评论区、播客、网页文章、案例和个人流程。
+
+建议每个项目使用这样的结构：
+
+```text
+distilled-sources/
+└── [source-or-project-name]/
+    ├── raw/
+    ├── transcripts/
+    ├── notes/
+    ├── extraction_cards.md
+    └── outputs/
+```
+
+`distilled-sources/INDEX.md` 用来维护总索引，`_source-template.md` 用作单个网络资源或资料项目的蒸馏记录模板。
+
 ## 校验
 
 可用 Codex 的 skill 校验脚本检查结构：
@@ -125,7 +149,7 @@ Skill is valid!
 
 本 Skill 吸收了以下方法：
 
-- 书籍方法论蒸馏：把书从“内容总结”转成“问题诊断 -> 原则判断 -> 行动方案 -> 验证指标 -> 复盘修正”。
+- 多源方法论蒸馏：把书籍、视频、帖子、评论、案例和流程从“内容总结”转成“问题诊断 -> 原则判断 -> 行动方案 -> 验证指标 -> 复盘修正”。
 - Skill 蒸馏方法论：把隐性知识压缩成结构化、显性、紧凑的指令包。
 - 原子规则三层：行为规则、决策规则、思维框架。
 - 验证闭环：baseline 测试、Skill 激活测试、delta 检验和持续迭代。
